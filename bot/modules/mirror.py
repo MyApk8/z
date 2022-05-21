@@ -219,7 +219,7 @@ class MirrorListener:
         mesg = self.message.text.split('\n')
         message_args = mesg[0].split(' ', maxsplit=1)
         reply_to = self.message.reply_to_message
-        slmsg = f"Added by: {uname} \nUser ID: <code>{self.user_id}</code>\n\n"
+        slmsg = f"🙎 Added by: {uname} \nUser ID: <code>{self.user_id}</code>\n\n"
         if LINK_LOGS:
             try:
                 source_link = message_args[1]
@@ -241,7 +241,7 @@ class MirrorListener:
         link_id = str(LINK_LOGS)[5:][:-1]
         S_link =  f"https://t.me/c/{link_id}/{msg_id}"
             '''
-        msg = f'<b>Name: </b><code>{name.replace("<", "")}</code>\n\n<b>Size: </b>{size}'
+        msg = f'<b>🏷️ </b><code>{name.replace("<", "")}</code>\n\n<b>Size: </b>{size}'
         if AUTO_DELETE_UPLOAD_MESSAGE_DURATION != -1:
             reply_to = self.message.reply_to_message
             if reply_to is not None:
@@ -254,7 +254,7 @@ class MirrorListener:
             if self.message.chat.type == 'private':
                 warnmsg = ''
             else:
-                warnmsg = f'\n<b>This message will be deleted in <i>{auto_delete_message} minutes</i> from this group.</b>\n'
+                warnmsg = f'\n<b>🗑️ This message will be deleted in <i>{auto_delete_message} minutes</i> from this group.</b>\n'
         else:
             warnmsg = ''
         if BOT_PM and self.message.chat.type != 'private':
@@ -272,7 +272,7 @@ class MirrorListener:
             msg += f'\n<b>Total Files: </b>{count}'
             if typ != 0:
                 msg += f'\n<b>Corrupted Files: </b>{typ}'
-            msg += f'\n<b>#Leeched By: </b>{self.tag}\n'
+            msg += f'\n<b>💾 #Leeched By: </b>{self.tag}\n'
             if BOT_PM:
                 message = sendMessage(msg + pmwarn + warnmsg, self.bot, self.update)
                 Thread(target=auto_delete_upload_message, args=(bot, self.message, message)).start()
@@ -328,11 +328,11 @@ class MirrorListener:
         else:
             msg += f'\n\n<b>Type: </b>{typ}'
             if ospath.isdir(f'{DOWNLOAD_DIR}{self.uid}/{name}'):
-                msg += f'\n<b>SubFolders: </b>{folders}'
-                msg += f'\n<b>Files: </b>{files}'
+                msg += f'\n<b>🗂️ SubFolders: </b>{folders}'
+                msg += f'\n<b>📂 Files: </b>{files}'
             link = short_url(link)
             buttons.buildbutton("☁️ Drive Link", link)
-            LOGGER.info(f'Done Uploading {name}')
+            LOGGER.info(f'⏫ Done Uploading {name}')
             if INDEX_URL is not None:
                 url_path = requests.utils.quote(f'{name}')
                 share_url = f'{INDEX_URL}/{url_path}'
@@ -355,7 +355,7 @@ class MirrorListener:
             if SOURCE_LINK is True:
                 buttons.buildbutton(f"🔗 Source Link", S_link)
             """
-            uploader = f'\n\n<b>#Uploaded By: </b>{self.tag}\n'
+            uploader = f'\n\n<b>🙎 #Uploaded By: </b>{self.tag}\n'
             if MIRROR_LOGS:
                 try:
                     for i in MIRROR_LOGS:
